@@ -1,0 +1,22 @@
+{
+  "name": "h4cksterbot",
+  "version": "1.0.0",
+  "description": "Telegram bot that integrates with HTB api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Croluy/HTB_h4cksterbot.git"
+  },
+  "keywords": [
+    "HackTheBoxBot"
+  ],
+  "author": "Croluy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Croluy/HTB_h4cksterbot/issues"
+  },
+  "homepage": "https://github.com/Croluy/HTB_h4cksterbot#readme"
+}
