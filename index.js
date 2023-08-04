@@ -61,7 +61,7 @@ bot.command('expire', (ctx) => {
     let daysLeft = Math.floor((expirationDate-currentDate) / (1000 * 60 * 60 * 24));
     const weeksLeft = Math.floor((expirationDate-currentDate) / (1000 * 60 * 60 * 24 * 7));
 
-    if(weeksLeft>0){
+    if(weeksLeft>1){
         daysLeft=daysLeft-weeksLeft*7;
         ctx.reply(fun.s(Replies.index.__expireToken.daysandweeks,{year:HTBtokenExpiration.year,month:m,day:d,daysLeft:daysLeft,weeksLeft:weeksLeft}),{parse_mode: 'HTML'});
     }else{

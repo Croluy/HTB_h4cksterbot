@@ -8,8 +8,8 @@
     },
     "index":{
         "__expireToken":{
-            "daysandweeks":"Time left:\n\t<b>${daysLeft} days and ${weeksLeft} weeks</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>",
-            "daysonly":"Time left: \n\t<b>${daysLeft} days</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>"
+            "daysandweeks":"Time left:\n\t<b>${daysLeft} day(s) and ${weeksLeft} week(s)</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>",
+            "daysonly":"Time left: \n\t<b>${daysLeft} day(s)</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>"
         }
     }
 }
