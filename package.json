@@ -21,6 +21,8 @@
   "homepage": "https://github.com/Croluy/HTB_h4cksterbot#readme",
   "dependencies": {
     "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "telegraf": "^4.12.2"
   },
   "devDependencies": {

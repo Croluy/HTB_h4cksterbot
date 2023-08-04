@@ -1,0 +1,15 @@
+{
+    "functions":{
+        "checkExpiredToken":{
+            "log": "HTB token expired, please update it.\nBot is being stopped.\n\nFollow this steps to correctly set me again:\n\t1. Go to https://app.hackthebox.com/ and log in\n\t2. Click on your profile user (top right)\n\t3. Click 'Account Settings'\n\t4. Find 'App Tokens' menu\n\t5. Click on 'Manage Apps Tokens' and delete the expired one\n\t6. Click on 'Create App Token'\n\t7. Copy the new token\n\t8. Replace the old token new one in the '.env' file\n\t9. In 'index.js' update the 'HTBtokenExpiration' object with the new expiration date\n\t10. Execute 'git add . && git commit -m \"updated HTB token expiration date\" && git push && npm version patch && npm publish && npm start'\n",
+            "toAdmin": "Hey ✌🏻,\nI have bad news for you. HTB Token is expired. ⚠️\nThis means I can't work properly anymore and I am going to stop myself.\nFollow this steps to correctly set me again:\n\t1. Go to https://app.hackthebox.com/ and log in\n\t2. Click on your profile user (top right)\n\t3. Click 'Account Settings'\n\t4. Find 'App Tokens' menu\n\t5. Click on 'Manage Apps Tokens' and delete the expired one\n\t6. Click on 'Create App Token'\n\t7. Copy the new token\n\t8. Replace the old token new one in the '.env' file\n\t9. In 'index.js' update the 'HTBtokenExpiration' object with the new expiration date\n\t10. Execute '<code>git add . && git commit -m \"updated HTB token expiration date\" && git push && npm version patch && npm publish && npm start</code>'\n\nThat's it! You've replaced the token! 🎉",
+            "toAdmin_1week": "Hey ✌🏻,\nI have bad news for you. HTB Token is going to expire in 1 week. ⚠️\nThis means I will have to stop myself when that happens.\nFollow this steps to reset the token before I stop myself:\n\t1. Go to https://app.hackthebox.com/ and log in\n\t2. Click on your profile user (top right)\n\t3. Click 'Account Settings'\n\t4. Find 'App Tokens' menu\n\t5. Click on 'Manage Apps Tokens' and delete the expired one\n\t6. Click on 'Create App Token'\n\t7. Copy the new token\n\t8. Replace the old token new one in the '.env' file\n\t9. In 'index.js' update the 'HTBtokenExpiration' object with the new expiration date\n\t10. Stop the bot (Ctrl+c)\n\t11. Execute '<code>git add . && git commit -m \"updated HTB token expiration date\" && git push && npm version patch && npm publish && npm start</code>'\n\nThat's it! You've replaced the token! 🎉"
+        }
+    },
+    "index":{
+        "__expireToken":{
+            "daysandweeks":"Time left:\n\t<b>${daysLeft} days and ${weeksLeft} weeks</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>",
+            "daysonly":"Time left: \n\t<b>${daysLeft} days</b>\n\nToken expiration date:\n\t⚠️ <b>${day} / ${month} / ${year}</b> ⚠️\n\n<i>Format:\nDD / MM / YYYY</i>"
+        }
+    }
+}
