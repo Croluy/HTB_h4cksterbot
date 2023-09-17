@@ -1,1 +1,5 @@
 .env
+tokens.json
+/node_modules/
+.DS_Store
+.npmignore

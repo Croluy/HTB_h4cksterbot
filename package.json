@@ -20,10 +20,12 @@
   },
   "homepage": "https://github.com/Croluy/HTB_h4cksterbot#readme",
   "dependencies": {
+    "axios": "^1.5.0",
     "dotenv": "^16.3.1",
+    "edit-json-file": "^1.7.0",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
-    "telegraf": "^4.12.2"
+    "telegraf": "^4.13.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
