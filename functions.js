@@ -287,6 +287,29 @@ function checkGroup(ctx){
     return true;
 }
 
+/**
+ * Check inside tokens.json file to see any expired token and delete all the expired ones.
+ */
+function deleteExpiredTokens(ctx){
+    // Reload file from the disk
+    tokens_file = editJsonFile(`./tokens.json`, {autosave: true});
+
+    //check if token is already in tokens.json file
+    const tokensList = tokens_file.get("List");
+
+    for(let i=0; i<tokensListIndex; i++){
+        const expirationDate = new Date(tokensList[i].ExpirationDate.year,tokensList[i].ExpirationDate.month,tokensList[i].ExpirationDate.day);
+        const currentDate = new Date();
+        if(expirationDate-currentDate <= 0){    //Token expired
+            ctx.telegram.sendMessage(tokensList[i].ID,Replies.functions.checkExpiredToken.toAdmin,{parse_mode: 'HTML'});
+            tokensList.splice(i,1); //delete expired token
+            tokensListIndex--;  //decrement number of the next token
+            tokens_file.set("TokensNumber",tokensListIndex);  //update token index
+            tokens_file.save();      //save file
+        }
+    }
+}
+
 //Old method, requires 'fun.' prefix. But it provides with functions description.
 module.exports = {
     initFiles,
@@ -300,7 +323,8 @@ module.exports = {
     startReplyWith,
     deleteMessage,
     deleteBotMessage,
-    checkGroup
+    checkGroup,
+    deleteExpiredTokens
 }
 
 /*//New method, does not require prefix. But it does not provide with functions description.

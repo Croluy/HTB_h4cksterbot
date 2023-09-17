@@ -26,8 +26,9 @@ const rankString = {
 };
 
 let botReply=null;  //variable to store the bot reply message, so it can be deleted after a certain amount of time
+let botReplyArray=[];   //array to store the bot reply messages, so they can be deleted after a certain amount of time
 const msDelUserMessage=0;   //time in ms after which the user message is deleted
-const msDelBotMessage=60000;    //time in ms after which the bot message is deleted
+const msDelBotMessage=90000;    //time in ms after which the bot message is deleted
 
 //importing Replies from BotReplies.json
 const res = fs.readFileSync(path.resolve(__dirname, "Replies.json"));
@@ -47,6 +48,9 @@ bot.start(async (ctx) => {
 
     botReply=await ctx.reply(Replies.index.__start.start,{parse_mode: 'HTML'});
 
+    //if it was the creator of the bot to execute the command delete all the expired tokens from tokens.json
+    if(ctx.from.id==process.env.CREATOR_ID) fun.deleteExpiredTokens();
+
     //Delete messages
     fun.deleteMessage(ctx,msDelUserMessage);
     fun.deleteBotMessage(ctx,botReply,msDelBotMessage);
@@ -58,6 +62,9 @@ bot.help(async (ctx) => {
 
     //send the help message
     botReply=await ctx.reply(Replies.index.__help.help,{parse_mode: 'HTML'});
+
+    //if it was the creator of the bot to execute the command delete all the expired tokens from tokens.json
+    if(ctx.from.id==process.env.CREATOR_ID) fun.deleteExpiredTokens();
 
     //Delete messages
     fun.deleteMessage(ctx,msDelUserMessage);
@@ -286,6 +293,66 @@ bot.command('team', async (ctx) => {
     //Delete messages
     fun.deleteMessage(ctx,msDelUserMessage);
     fun.deleteBotMessage(ctx,botReply,msDelBotMessage);
+});
+
+bot.command('activemachines', async (ctx) => {
+    if(fun.checkGroup(ctx)==false) return;
+    fun.checkExpiredToken(ctx);
+
+    //get token, if not found send a message to user
+    const token=fun.getToken(ctx.from.id);
+    if(token==-1){
+        botReply=await ctx.reply(Replies.index.no_token_found,{parse_mode: 'HTML'});
+
+        //Delete messages
+        fun.deleteMessage(ctx,msDelUserMessage);
+        fun.deleteBotMessage(ctx,botReply,msDelBotMessage);
+        return;
+    }
+
+    //don't execute command in groups as it will flood chat and send 20 notifications to each user, that would be annoying
+    if(ctx.message.chat.type!='private'){
+        //delete message sent in group
+        await ctx.deleteMessage(ctx.message.message_id);
+        botReply=await ctx.reply(Replies.index.__activemachines.group,{parse_mode: 'HTML'});
+        fun.deleteBotMessage(ctx,botReply,msDelBotMessage);
+        return;
+    }
+    
+    let ActiveMachinesNumber=null;
+
+    try{
+        const response = await axios.get('https://www.hackthebox.com/api/v4/machine/list', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        ActiveMachinesNumber=response.data.info.length;
+        if(ActiveMachinesNumber==null || ActiveMachinesNumber==undefined) team="No Active Machine";
+
+        let user_done=null;
+        let root_done=null;
+        let capt=null;
+
+        botReply=await ctx.reply(fun.startReplyWith(ctx)+fun.s(Replies.index.__activemachines.mess_numb_am,{am:ActiveMachinesNumber}),{parse_mode: 'HTML'});
+        if(ActiveMachinesNumber>0 || ActiveMachinesNumber != "No Active Machine")
+            for(let i=0;i<ActiveMachinesNumber;i++){
+                if(response.data.info[i].authUserInUserOwns==null) user_done="❌"; else user_done="✅";
+                if(response.data.info[i].authUserInRootOwns==null) root_done="❌"; else root_done="✅";
+                capt=fun.s(Replies.index.__activemachines.mess_am,{name:response.data.info[i].name, difficulty:response.data.info[i].difficultyText, os:response.data.info[i].os, stars:response.data.info[i].stars, points:response.data.info[i].points, user_owns:response.data.info[i].user_owns_count, user_done:user_done, root_owns:response.data.info[i].root_owns_count, root_done:root_done});
+                botReplyArray[i]=await ctx.replyWithPhoto({url:'https://hackthebox.com'+response.data.info[i].avatar}, {caption: capt});
+            }
+    }catch(err){
+        botReply=await ctx.reply(fun.s(Replies.index.req_error,{creator:process.env.CREATOR_USERNAME, error:err, headers:"No Headers"}),{parse_mode: 'HTML'});
+    }
+
+    //Delete messages
+    fun.deleteMessage(ctx,msDelUserMessage);
+    fun.deleteBotMessage(ctx,botReply,msDelBotMessage);
+    for(let i=0;i<ActiveMachinesNumber;i++) fun.deleteBotMessage(ctx,botReplyArray[i],msDelBotMessage);
+    //clear the array
+    let r=null;
+    while(r!=undefined) r=botReplyArray.pop();
 });
 
 bot.on('text', async (ctx) => {

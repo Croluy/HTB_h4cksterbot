@@ -16,7 +16,7 @@
             "start":"Hello! Nice to have you here.\nPlease execute /help to get a brief description about thi bot and its commands."
         },
         "__help":{
-            "help":"Hey there! ✌🏻\nI am a bot created to retrieve data from HackTheBox. This bot is currently under development and it might not always be active, you can quickly check if the bot is online by sending the message 'ping', if the bot replies with 'pong' within 1/2 seconds it is currently online.\n\n📄 In order to work I need to be activated with your HTB token.\nYou can learn how to do that by executing the command <code>/instructions</code> and following that procedure.\n\n💻 Here's a list of all commands I currently support:\n\t~ /help\t\tThis message;\n\t~ /instructions\t\tGet a step to step guide on how to set your HTB token in order to use this bot;\n\t~ /token [expiration date] [token]\t\tSet your HTB token in order to use the bot;\n\t~ /expire\t\tCheck in how much time your token will expire;\n\t~ /id\t\tGet your HTB ID;\n\t~ /rank\t\tGet your HTB Rank.\n\n👀 I will delete both your commands immediately and my own messages after 1 minute to keep chat clean!"
+            "help":"Hey there! ✌🏻\nI am a bot created to retrieve data from HackTheBox. This bot is currently under development and it might not always be active, you can quickly check if the bot is online by sending the message 'ping', if the bot replies with 'pong' within 1/2 seconds it is currently online.\n\n📄 In order to work I need to be activated with your HTB token.\nYou can learn how to do that by executing the command <code>/instructions</code> and following that procedure.\n\n💻 Here's a list of all commands I currently support:\n\t~ /help\t\tThis message;\n\t~ /instructions\t\tGet a step to step guide on how to set your HTB token in order to use this bot;\n\t~ /token [expiration date] [token]\t\tSet your HTB token in order to use the bot;\n\t~ /expire\t\tCheck in how much time your token will expire;\n\t~ /id\t\tGet your HTB ID;\n\t~ /rank\t\tGet your HTB Rank;\n\t~ /team\t\tGet your HTB Team;\n\t~ /activemachines\t\tGet a list of all current active machines.\n\n👀 I will delete both your commands immediately and my own messages after 1 minute to keep chat clean!"
         },
         "__instructions":{
             "how_to_set":"⚙️ Follow this steps to set your HTB token:\n\n\t1. Go to https://app.hackthebox.com/ and log in\n\t2. Click on your <b>user profile</b> (top right of the website)\n\t3. Click '<b>Account Settings</b>'\n\t4. Find '<b>App Tokens</b>' menu (right side)\n\t5. Click on '<b>Create App Token</b>'\n\t6. Give that token a name and set the expiration time (<i>suggested: at least 1 month</i>)\n\t7. Click <b>create</b> and copy the <b>token</b>\n\t8. Click on '<b>Manage App Tokens</b>' and remember the new token's <b>expiration date</b>\n\t9. Start <b>private chat</b> (<b>NOT</b> group) with @HTB_H4cksterbot on Telegram\n\t10. Execute the command <code>/token [expiration_date] [token]</code>\n\nThat's it! You've successfully set your HTB token! 🎉"
@@ -39,6 +39,11 @@
         },
         "__team":{
             "mess_team":"Team: <code>${team}</code>"
+        },
+        "__activemachines":{
+            "mess_numb_am":"Number of Active Machines: ${am}\nHere is a list of all of them with all the basic info you might need!",
+            "mess_am":"💻 ${name}\n${difficulty}\t\t\t-\t\t\t${stars} Stars\n${os}\t\t\t-\t\t\t${points} pts\n👤\tUser Owns:\t\t${user_owns}\t${user_done}\n#️⃣\tRoot Owns:\t\t${root_owns}\t${root_done}",
+            "group":"⚠️ Sorry but I can't send you a list of all active machines in a group.\nIt would flood the chat and make other members' notifications go crazy. 🙈\nPlease start a private chat with @HTB_H4cksterbot and execute the command <code>/activemachines</code> to get a list of all active machines!"
         }
     }
 }
