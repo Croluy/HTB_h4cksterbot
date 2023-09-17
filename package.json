@@ -1,6 +1,6 @@
 {
   "name": "h4cksterbot",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Telegram bot that integrates with HTB api.",
   "main": "index.js",
   "scripts": {
